@@ -7,8 +7,9 @@ class MissionCreateScreen extends StatefulWidget {
   @override
   State<MissionCreateScreen> createState() => _MissionCreateScreenState();
 }
-
+//aquu vive a logica
 class _MissionCreateScreenState extends State<MissionCreateScreen> {
+  //controla o form,valida tudo de uma vez
   final _formKey = GlobalKey<FormState>();
 
   // Controladores de texto para os campos do formulário
@@ -20,8 +21,10 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   String? _errorMessage;
 
   @override
+  //executa quando a tela abre
   void initState() {
     super.initState();
+    //inicializa campos vazios
     _nameController = TextEditingController();
     _launchDateController = TextEditingController();
     _statusController = TextEditingController();
@@ -29,6 +32,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
 
   @override
   void dispose() {
+    //libera a memoria / evita vazamento de dados
     _nameController.dispose();
     _launchDateController.dispose();
     _statusController.dispose();
@@ -36,7 +40,9 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
   }
 
   @override
+  //constroi a ui
   Widget build(BuildContext context) {
+    //estrutura da tela
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastrar Missão'),
@@ -45,6 +51,7 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
+        //formulario
         child: Form(
           key: _formKey,
           child: ListView(

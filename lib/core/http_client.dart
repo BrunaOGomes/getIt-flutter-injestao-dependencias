@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-
+//fine sua própria camada de acesso HTTP
 class CustomHttpClient {
+  //Isso evita repetir URL em todas as chamadas.
   final Dio dio;
   final String baseUrl;
 

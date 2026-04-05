@@ -29,11 +29,14 @@ class MissionListScreen extends StatelessWidget {
       // Estrutura principal da tela, mostra loading, erro ou lista de missões
       body: vm.isLoading
           ? const Center(child: CircularProgressIndicator())
+          //erro
           : vm.errorMessage != null
               ? Center(child: Text(vm.errorMessage!))
+              //lista
               : ListView.builder(
                   itemCount: vm.missions.length,
                   itemBuilder: (context, index) {
+                    //item da lista
                     final mission = vm.missions[index];
                     return ListTile(
                       // Exibe o ID da missão em um círculo
@@ -118,6 +121,7 @@ class MissionListScreen extends StatelessWidget {
                     );
                   },
                 ),
+                //abre a tela de criacao
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,

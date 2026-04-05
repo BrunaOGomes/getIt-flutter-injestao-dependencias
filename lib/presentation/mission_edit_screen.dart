@@ -29,7 +29,9 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
   @override
   void initState() {
     super.initState();
+    //pega a missao passada 
     final m = widget.mission;
+    //preenche os campos
     _nameController = TextEditingController(text: m.name);
     _launchDateController = TextEditingController(text: m.launchDate);
     _statusController = TextEditingController(text: m.status);
@@ -47,6 +49,7 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //apbar dinamica
         title: Text('Editar #${widget.mission.id}'),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
@@ -105,6 +108,7 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  //botao
                   onPressed: _isSubmitting ? null :(){ },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
