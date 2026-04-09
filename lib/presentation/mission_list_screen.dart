@@ -5,9 +5,22 @@ import 'mission_edit_screen.dart';
 import 'mission_view_model.dart';
 
 /// Tela principal que lista as missões espaciais da agência.
-class MissionListScreen extends StatelessWidget {
+class MissionListScreen extends StatefulWidget {
   const MissionListScreen({super.key});
 
+  @override
+  State<MissionListScreen> createState() => _MissionListScreenState();
+}
+
+class _MissionListScreenState extends State<MissionListScreen> {
+  late MissionViewModel _missionViewModel;
+
+  @override
+  void initState(){
+    _missionViewModel = context.read<MissionViewModel>();
+    _missionViewModel.loadMissions();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     // Obtém o ViewModel associado à lista de missões
