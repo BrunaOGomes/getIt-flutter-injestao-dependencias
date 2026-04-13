@@ -1,5 +1,5 @@
-import 'package:injestao_dependencias/data/mission_remote_service.dart';
-import 'package:injestao_dependencias/domain/mission_model.dart';
+import '../domain/mission_model.dart';
+import 'mission_remote_service.dart';
 
 //define um contrato
 abstract class MissionRepository {
