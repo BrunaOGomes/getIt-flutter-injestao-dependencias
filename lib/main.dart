@@ -13,6 +13,8 @@ Future<void> main() async {
     //provider == injecao de estado
     MultiProvider(
       //Injeta o MissionViewModel no app inteiro.
+      //provider -> gerenciador de estado simples e eficiente
+      
       providers: [
         ChangeNotifierProvider(
           //cria o viewmodel
@@ -28,6 +30,7 @@ Future<void> main() async {
 // Classe principal do app (sem estado - Stateless)
 class MyApp extends StatelessWidget {
 // Construtor com suporte a chave (key) para controle do widget
+//Tudo é widget: botão, texto, tela inteira, ícone, layout…
   const MyApp({super.key});
   // Método obrigatório que constrói a interface
   @override
