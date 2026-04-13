@@ -22,19 +22,26 @@ Future<void> main() async {
     ),
   );
 }
-
+// Classe principal do app (sem estado - Stateless)
 class MyApp extends StatelessWidget {
+// Construtor com suporte a chave (key) para controle do widget
   const MyApp({super.key});
-
+  // Método obrigatório que constrói a interface
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Título do aplicativo (usado pelo sistema)
       title: 'NASA - Missões',
+      // Remove a faixa "debug" no canto da tela
       debugShowCheckedModeBanner: false,
+      // Tema global do app
       theme: ThemeData(
+         // Define o esquema de cores baseado em uma cor principal
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        // Ativa o Material Design 3
         useMaterial3: true,
       ),
+      // Tela inicial do aplicativo
       home: const MissionListScreen(),
     );
   }

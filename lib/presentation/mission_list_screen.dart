@@ -122,17 +122,26 @@ class MissionListScreen extends StatelessWidget {
                   },
                 ),
                 //abre a tela de criacao
+                // Botão flutuante que aparece no canto da tela
       floatingActionButton: FloatingActionButton(
+        // Cor de fundo do botão (preto)
         backgroundColor: Colors.black,
+         // Cor do ícone (branco)
         foregroundColor: Colors.white,
+        // Texto de dica ao segurar ou passar o mouse
         tooltip: 'Adicionar missão',
+        // Função executada ao clicar no botão
         onPressed: () {
+          // Acessa o Navigator para trocar de tela
           Navigator.of(context).push(
+            // Define a rota (tela) com estilo Material
             MaterialPageRoute<void>(
+              // Builder constrói a nova tela
               builder: (context) => const MissionCreateScreen(),
             ),
           );
         },
+         // Ícone exibido dentro do botão (+)
         child: const Icon(Icons.add),
       ),
     );

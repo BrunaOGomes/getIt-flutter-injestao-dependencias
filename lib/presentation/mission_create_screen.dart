@@ -108,27 +108,34 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                             ? 'Informe o status.'
                             : null,
               ),
+              //espaço vertical
               const SizedBox(height: 32),
+              //ocupa toda a largura disponivel
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  //Se estiver enviando (_isSubmitting == true), desabilita o botão
+                  //Caso contrário, permite o clique
                   onPressed: _isSubmitting ? null : (){
 
                   },
+                  //estilo do botao
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                   ),
                   child:
                       _isSubmitting
+                      //enquanto estiver enviando,mostra um loading
                           ? const SizedBox(
                             width: 22,
                             height: 22,
                             child: CircularProgressIndicator(
-                              strokeWidth: 2,
+                              strokeWidth: 2,//espessura do spinner
                               color: Colors.white,
                             ),
                           )
+                          //Caso contrário, mostra o texto do botão
                           : const Text('Cadastrar'),
                 ),
               ),

@@ -110,19 +110,24 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
                 child: ElevatedButton(
                   //botao
                   onPressed: _isSubmitting ? null :(){ },
+                      // Estilo do botão
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                   ),
+                  // Conteúdo do botão:
+                 // Se estiver enviando (_isSubmitting == true)
                   child: _isSubmitting
                       ? const SizedBox(
                           width: 22,
                           height: 22,
+                         // Mostra um indicador de carregamento (spinner)
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             color: Colors.white,
                           ),
                         )
+                      // Caso contrário, mostra o texto normal
                       : const Text('Salvar alterações'),
                 ),
               ),
