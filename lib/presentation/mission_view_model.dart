@@ -7,7 +7,7 @@ import '../domain/mission_model.dart';
 /// ViewModel responsável por gerenciar o estado da lista de missões.
 class MissionViewModel extends ChangeNotifier {
   final MissionRepository _missionRepository;
-  
+
   MissionViewModel(this._missionRepository);
 
   // Lista interna de missões
@@ -30,20 +30,39 @@ class MissionViewModel extends ChangeNotifier {
 
   /// Carrega as missões da fonte de dados e atualiza o estado.
   Future<void> loadMissions() async {
-    _isLoading =true;
+    _isLoading = true;
     _errorMessage = null;
     notifyListeners();
     //metodo para se buscar ele tras as missoes ai o finally é para parar a busca caso nao for erro
     try {
-          _missions = await _missionRepository.getMissions();
-    } on DioException catch(e) {
+      _missions = await _missionRepository.getMissions();
+    } on DioException catch (e) {
       _errorMessage = 'Pane no sistema ${e.message}';
-    } catch(e){
-            _errorMessage = 'Erro,tente novamente mais tarde';
-    } finally{
+    } catch (e) {
+      _errorMessage = 'Erro,tente novamente mais tarde';
+    } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
+  //future - pois precisa esperar a api processas
+  ///void - pois nao vai ter retono  e sim atualizar
+  ///
+  Future<void> createMission(MissionModel mission) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _missionRepository.createMission(mission);
+      await loadMissions(); // Recarrega a lista após criar
+    } on DioException catch (e) {
+      _errorMessage = 'Pane no sistema ${e.message}';
+    } catch (e) {
+      _errorMessage = 'Erro,tente novamente mais tarde';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 }

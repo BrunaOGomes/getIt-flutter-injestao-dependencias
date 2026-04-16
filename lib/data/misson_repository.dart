@@ -9,6 +9,7 @@ abstract class MissionRepository {
   Banco local
   Mock para testes*/
   Future<List<MissionModel>> getMissions();
+    Future<bool> createMission(MissionModel mission);
 }
 //implementa contrato
 class MissionRepositoryImpl implements MissionRepository {
@@ -20,5 +21,10 @@ class MissionRepositoryImpl implements MissionRepository {
     @override
   Future<List<MissionModel>> getMissions() {
     return _service.getMission();
+  }
+
+  @override
+  Future<bool> createMission(MissionModel mission) {
+    return _service.createMission(mission);
   }
 }

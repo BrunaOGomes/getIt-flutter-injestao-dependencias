@@ -4,14 +4,14 @@ class MissionModel {
   final String name;
   final String launchDate;
   final String status;
-//construtor da classe
+  //construtor da classe
   MissionModel({
     required this.id,
     required this.name,
     required this.launchDate,
     required this.status,
   });
-//constutor especial usado quando vc qr criar um objeto a partir de outra fonte (JSON aqui)
+  //constutor especial usado quando vc qr criar um objeto a partir de outra fonte (JSON aqui)
   factory MissionModel.fromJson(Map<String, dynamic> json) {
     //json convertido em mapa
     //aqui cria um novo obj MissionModel
@@ -22,13 +22,12 @@ class MissionModel {
       name: json['name'] ?? '' as String,
       //trata diferentes formatos de API
       //resolve API´s ionconsistentes
-      launchDate:
-          (json['launchDate'] ?? json['launch_date'] ?? '') as String,
-          //conversao direta
+      launchDate: (json['launchDate'] ?? json['launch_date'] ?? '') as String,
+      //conversao direta
       status: json['status'] as String,
     );
   }
-//converte o obj para json,cria um mapa com os dados do objeto
+  //converte o obj para json,cria um mapa com os dados do objeto
   Map<String, dynamic> toJson() {
     return {
       'id': id,

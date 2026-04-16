@@ -29,7 +29,7 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
   @override
   void initState() {
     super.initState();
-    //pega a missao passada 
+    //pega a missao passada
     final m = widget.mission;
     //preenche os campos
     _nameController = TextEditingController(text: m.name);
@@ -76,8 +76,9 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
                   labelText: 'Nome da missão',
                   border: OutlineInputBorder(),
                 ),
-                validator: (val) =>
-                    val == null || val.trim().isEmpty ? 'Informe o nome.' : null,
+                validator: (val) => val == null || val.trim().isEmpty
+                    ? 'Informe o nome.'
+                    : null,
               ),
               const SizedBox(height: 16),
               // Campo para a data de lançamento
@@ -88,8 +89,9 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
                   hintText: 'YYYY-MM-DD',
                   border: OutlineInputBorder(),
                 ),
-                validator: (val) =>
-                    val == null || val.trim().isEmpty ? 'Informe a data.' : null,
+                validator: (val) => val == null || val.trim().isEmpty
+                    ? 'Informe a data.'
+                    : null,
               ),
               const SizedBox(height: 16),
               // Campo para o status da missão
@@ -109,19 +111,19 @@ class _MissionEditScreenState extends State<MissionEditScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   //botao
-                  onPressed: _isSubmitting ? null :(){ },
-                      // Estilo do botão
+                  onPressed: _isSubmitting ? null : () {},
+                  // Estilo do botão
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                   ),
                   // Conteúdo do botão:
-                 // Se estiver enviando (_isSubmitting == true)
+                  // Se estiver enviando (_isSubmitting == true)
                   child: _isSubmitting
                       ? const SizedBox(
                           width: 22,
                           height: 22,
-                         // Mostra um indicador de carregamento (spinner)
+                          // Mostra um indicador de carregamento (spinner)
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             color: Colors.white,

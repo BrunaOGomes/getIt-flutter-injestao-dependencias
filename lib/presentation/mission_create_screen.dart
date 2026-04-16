@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:injestao_dependencias/domain/mission_model.dart';
+import 'package:injestao_dependencias/presentation/mission_view_model.dart';
+import 'package:provider/provider.dart';
 
 /// Tela para criar uma nova missão.
 class MissionCreateScreen extends StatefulWidget {
@@ -7,7 +10,8 @@ class MissionCreateScreen extends StatefulWidget {
   @override
   State<MissionCreateScreen> createState() => _MissionCreateScreenState();
 }
-//aquu vive a logica
+
+//aqui vive a logica
 class _MissionCreateScreenState extends State<MissionCreateScreen> {
   //controla o form,valida tudo de uma vez
   final _formKey = GlobalKey<FormState>();
@@ -37,6 +41,32 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
     _launchDateController.dispose();
     _statusController.dispose();
     super.dispose();
+  }
+
+  Future<void> getData() async {
+    // Aqui você pode buscar os dados necessários para preencher os campos do formulário,
+    // como opções de status ou outras informações relevantes.
+    //se tiver erro saia se nao tiver entra aqui
+    if (!_formKey.currentState!.validate()) {
+      setState(() {
+        _isSubmitting = false;
+        _errorMessage = 'Por favor, preencha todos os campos corretamente.'; 
+      });
+      final mission = MissionModel(
+        id: 0,
+        name: _nameController.text,
+        launchDate: _launchDateController.text,
+        status: _statusController.text,
+      );
+      final vm = context.read<MissionViewModel>();
+      await vm.createMission(mission);
+      setState(() {
+        _isSubmitting = false;
+        _errorMessage = null;
+      });
+
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -72,11 +102,9 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                   labelText: 'Nome da missão',
                   border: OutlineInputBorder(),
                 ),
-                validator:
-                    (val) =>
-                        val == null || val.trim().isEmpty
-                            ? 'Informe o nome.'
-                            : null,
+                validator: (val) => val == null || val.trim().isEmpty
+                    ? 'Informe o nome.'
+                    : null,
               ),
               const SizedBox(height: 16),
               // Campo para a data de lançamento
@@ -87,11 +115,9 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                   hintText: 'YYYY-MM-DD',
                   border: OutlineInputBorder(),
                 ),
-                validator:
-                    (val) =>
-                        val == null || val.trim().isEmpty
-                            ? 'Informe a data.'
-                            : null,
+                validator: (val) => val == null || val.trim().isEmpty
+                    ? 'Informe a data.'
+                    : null,
               ),
               const SizedBox(height: 16),
               // Campo para o status da missão
@@ -102,11 +128,9 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                   hintText: 'Ativa/Concluída/Cancelada',
                   border: OutlineInputBorder(),
                 ),
-                validator:
-                    (val) =>
-                        val == null || val.trim().isEmpty
-                            ? 'Informe o status.'
-                            : null,
+                validator: (val) => val == null || val.trim().isEmpty
+                    ? 'Informe o status.'
+                    : null,
               ),
               //espaço vertical
               const SizedBox(height: 32),
@@ -116,27 +140,26 @@ class _MissionCreateScreenState extends State<MissionCreateScreen> {
                 child: ElevatedButton(
                   //Se estiver enviando (_isSubmitting == true), desabilita o botão
                   //Caso contrário, permite o clique
-                  onPressed: _isSubmitting ? null : (){
-
+                  onPressed: _isSubmitting ? null : () {
+                    getData();
                   },
                   //estilo do botao
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                   ),
-                  child:
-                      _isSubmitting
+                  child: _isSubmitting
                       //enquanto estiver enviando,mostra um loading
-                          ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,//espessura do spinner
-                              color: Colors.white,
-                            ),
-                          )
-                          //Caso contrário, mostra o texto do botão
-                          : const Text('Cadastrar'),
+                      ? const SizedBox(
+                          width: 22,
+                          height: 22,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2, //espessura do spinner
+                            color: Colors.white,
+                          ),
+                        )
+                      //Caso contrário, mostra o texto do botão
+                      : const Text('Cadastrar'),
                 ),
               ),
             ],
